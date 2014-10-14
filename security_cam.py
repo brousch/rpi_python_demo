@@ -2,15 +2,15 @@ import datetime
 import os
 import time
 
-from SimpleCV import Camera
+from SimpleCV import Camera, VideoStream
 import RPi.GPIO as GPIO
 
 def get_file_name(extension='png'):
-    dt = datetime.datetime.now().strftime("%Y-%m-%d_%H.%M.%S")
+    dt = datetime.datetime.now().strftime("%Y-%m-%d_%H:%M:%S")
     return os.path.join("pictures", 'sc-'+dt+'.'+extension)
 
-cam_size = {'width': 640, 'height': 480}
-vid_fps = 25
+cam_size = {'width': 320, 'height': 240}
+vid_fps = 15
 
 sensorPin = 7
 

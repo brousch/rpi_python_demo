@@ -15,7 +15,7 @@ sensorPin = 7
 
 
 def get_file_name(extension='png'):
-    dt = datetime.datetime.now().strftime("%Y-%m-%d_%H:%M:%S")
+    dt = datetime.datetime.now().strftime("%Y-%m-%d_%H%M%S")
     return os.path.join("pictures", 'sc-'+dt+'.'+extension)
 
 

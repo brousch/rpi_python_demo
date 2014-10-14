@@ -11,6 +11,7 @@ from utils import camera_is_ready
 # Settings
 cam_size = {'width': 320, 'height': 240}
 vid_fps = 15
+vid_length = 10 # seconds
 sensorPin = 7
 
 
@@ -44,7 +45,7 @@ while True:
         file_name = get_file_name('avi')
         print("Recording video {}".format(file_name))
         vid = VideoStream(file_name, fps=vid_fps)
-        for frame in range(0, vid_fps * 10):
+        for frame in range(0, int(vid_fps * vid_length)):
             img = cam.getImage()
             vid.writeFrame(img)
             time.sleep(1.0/vid_fps)

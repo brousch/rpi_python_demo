@@ -1,6 +1,10 @@
 import os
 import time
+
 from SimpleCV import Camera, VideoStream
+
+from utils import camera_is_ready
+
 
 cam_size = {'width': 640, 'height': 480}
 vid_fps = 25
@@ -8,11 +12,7 @@ file_name = os.path.join('pictures', 'video.avi')
 
 print("Initializing camera")
 cam = Camera(0, cam_size)
-r = g = b = 0
-while r + g + b < 0.01:
-    img = cam.getImage()
-    r, g, b = img[img.width/2, img.height/2]
-    print("r: {} g: {} b: {}".format(r,g,b))
+while not camera_is_ready(cam, debug=True):
     time.sleep(1)
 
 print("Recording video")
@@ -21,4 +21,3 @@ for frame in range(0, vid_fps * 10):
     img = cam.getImage()
     vid.writeFrame(img)
     time.sleep(1.0/vid_fps)
-

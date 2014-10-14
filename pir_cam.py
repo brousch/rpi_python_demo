@@ -5,6 +5,9 @@ import time
 from SimpleCV import Camera
 import RPi.GPIO as GPIO
 
+from utils import camera_is_ready
+
+
 def get_file_name():
     dt = datetime.datetime.now().strftime("%Y-%m-%d_%H.%M.%S")
     return os.path.join("pictures", dt+".jpg")
@@ -18,7 +21,10 @@ prevState = False
 currState = False
 
 cam_size = {'width': 1280, 'height':720}
+print("Initializing camera")
 cam = Camera(0, cam_size)
+while not camera_is_ready(cam, debug=True):
+    time.sleep(1)
 
 while True:
     currState = GPIO.input(sensorPin)

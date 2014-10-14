@@ -59,3 +59,5 @@ target/
 # Project-specific
 pictures/*.jpg
 pictures/*.png
+pictures/*.avi
+pictures/*.mp4

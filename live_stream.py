@@ -1,7 +1,9 @@
 from SimpleCV import Camera, JpegStreamer
 
+
+# Settings
 cam_size = {'width': 640, 'height':480}
-framerate = 10 # frames per second
+framerate = 15 # frames per second
 stream_host = 'localhost'
 stream_port = 8080
 stream_length = 60 # seconds

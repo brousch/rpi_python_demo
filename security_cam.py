@@ -8,14 +8,16 @@ import RPi.GPIO as GPIO
 from utils import camera_is_ready
 
 
+# Settings
+cam_size = {'width': 320, 'height': 240}
+vid_fps = 15
+sensorPin = 7
+
+
 def get_file_name(extension='png'):
     dt = datetime.datetime.now().strftime("%Y-%m-%d_%H:%M:%S")
     return os.path.join("pictures", 'sc-'+dt+'.'+extension)
 
-cam_size = {'width': 320, 'height': 240}
-vid_fps = 15
-
-sensorPin = 7
 
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(sensorPin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
@@ -23,10 +25,11 @@ GPIO.setup(sensorPin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 prevState = False
 currState = False
 
-print("Initializing camera")
+print("Initializing camera.")
 cam = Camera(0, cam_size)
 while not camera_is_ready(cam, debug=True):
     time.sleep(1)
+print("Camera is ready.")
 
 while True:
     currState = GPIO.input(sensorPin)

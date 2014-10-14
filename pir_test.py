@@ -1,6 +1,9 @@
-import RPi.GPIO as GPIO
 import time
 
+import RPi.GPIO as GPIO
+
+
+# Settings
 sensorPin = 7
 
 GPIO.setmode(GPIO.BOARD)

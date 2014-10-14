@@ -1,8 +1,9 @@
+import os
 import time
 from SimpleCV import Camera, Display
 
 cam_size = {'width': 1280, 'height':720}
-file_name = "still_image.png"
+file_name = os.path.join("pictures", "still_image.png")
 
 cam = Camera(0, cam_size)
 r = g = b = 0

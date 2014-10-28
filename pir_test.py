@@ -1,6 +1,9 @@
 import time
 
-import RPi.GPIO as GPIO
+try:
+    import RPi.GPIO as GPIO
+except:
+    print("RPi.GPIO is not installed or could not be found.")
 
 
 # Settings

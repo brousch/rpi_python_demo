@@ -1,9 +1,13 @@
 import datetime
 import os
-import time
+from time import sleep
 
 from SimpleCV import Camera
-import RPi.GPIO as GPIO
+
+try:
+    import RPi.GPIO as GPIO
+except:
+    print("RPi.GPIO is not installed or could not be found.")
 
 from utils import camera_is_ready
 
@@ -27,15 +31,15 @@ currState = False
 print("Initializing camera.")
 cam = Camera(0, cam_size)
 while not camera_is_ready(cam, debug=True):
-    time.sleep(1)
+    sleep(1)
 print("Camera is ready.")
 
 while True:
     currState = GPIO.input(sensorPin)
-    time.sleep(.1)
+    sleep(.1)
     if currState:  # True if movement, False if no movement
         file_name = get_file_name()
         print("Movement detected. Taking photo {}".format(file_name))
         img = cam.getImage()
         img.save(file_name)
-        time.sleep(5)
+        sleep(5)

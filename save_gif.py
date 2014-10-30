@@ -1,9 +1,9 @@
 import os
 from time import sleep
 
-from SimpleCV import Camera, ImageSet
+from SimpleCV import ImageSet
 
-from utils import camera_is_ready
+from utils import PreparedCamera
 
 
 # Settings
@@ -12,11 +12,7 @@ gif_interval = 0.5 # Seconds between frames
 gif_length = 10 # Length in seconds
 file_name = os.path.join('pictures', 'ani.gif')
 
-print("Initializing camera.")
-cam = Camera(0, cam_size)
-while not camera_is_ready(cam, debug=True):
-    sleep(1)
-print("Camera is ready.")
+cam = PreparedCamera(0, cam_size, debug=True)
 
 print("Recording images")
 img_set = ImageSet()

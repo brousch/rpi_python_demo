@@ -2,14 +2,14 @@ import datetime
 import os
 from time import sleep
 
-from SimpleCV import Camera, VideoStream
+from SimpleCV import VideoStream
 
 try:
     import RPi.GPIO as GPIO
 except:
     print("RPi.GPIO is not installed or could not be found.")
 
-from utils import camera_is_ready
+from utils import PreparedCamera
 
 
 # Settings
@@ -30,11 +30,7 @@ GPIO.setup(sensorPin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 prevState = False
 currState = False
 
-print("Initializing camera.")
-cam = Camera(0, cam_size)
-while not camera_is_ready(cam, debug=True):
-    sleep(1)
-print("Camera is ready.")
+cam = PreparedCamera(0, cam_size, debug=True)
 
 while True:
     currState = GPIO.input(sensorPin)
@@ -52,5 +48,5 @@ while True:
         for frame in range(0, int(vid_fps * vid_length)):
             img = cam.getImage()
             vid.writeFrame(img)
-            time.sleep(1.0/vid_fps)
+            sleep(1.0/vid_fps)
     sleep(5)

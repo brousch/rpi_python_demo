@@ -1,9 +1,10 @@
+#!/usr/bin/env python
 import os
 from time import sleep
 
-from SimpleCV import Camera, VideoStream
+from SimpleCV import VideoStream
 
-from utils import camera_is_ready
+from utils import PreparedCamera
 
 
 # Settings
@@ -11,11 +12,7 @@ cam_size = {'width': 320, 'height': 240}
 vid_fps = 15
 file_name = os.path.join('pictures', 'video.avi')
 
-print("Initializing camera.")
-cam = Camera(0, cam_size)
-while not camera_is_ready(cam, debug=True):
-    sleep(1)
-print("Camera is ready.")
+cam = PreparedCamera(0, cam_size, debug=True)
 
 print("Recording video")
 vid = VideoStream(file_name, fps=vid_fps)

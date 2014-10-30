@@ -1,4 +1,5 @@
-import time
+#!/usr/bin/env python
+from time import sleep
 
 try:
     import RPi.GPIO as GPIO
@@ -16,7 +17,7 @@ prevState = False
 currState = False
 
 while True:
-    time.sleep(.1)
+    sleep(.1)
     prevState = currState
     currState = GPIO.input(sensorPin)
     if currState != prevState:
